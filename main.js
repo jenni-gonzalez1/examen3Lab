@@ -4,12 +4,10 @@ import { guardarTareas, obtenerTareas } from './componentes/control/miLocalStora
 
 const app = document.getElementById('app');
 
-// Crear formulario y lista de tareas
 const lista = crearListaTareas();
 const formulario = crearFormulario((texto) => {
   lista.agregarTarea(texto);
 
-  // Guardar en localStorage
   tareas.push(texto);
   guardarTareas(tareas);
 });
