@@ -1,37 +1,24 @@
-const contenedorFormulario = document.getElementById('formulario');
+export function crearFormulario(onSubmit) {
+  const form = document.createElement('form');
+  form.classList.add('formulario');
 
-const inputTarea = document.createElement('input');
-inputTarea.type = 'text';
-inputTarea.placeholder = 'Nombre-de-la-tarea';
-inputTarea.id = 'input-tarea';
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'Escribe una tarea';
+  input.required = true;
 
-const seccion = document.getElementById('seccion-lista');
+  const boton = document.createElement('button');
+  boton.type = 'submit';
+  boton.textContent = 'Agregar';
 
-const botonAgregar = document.createElement('button');
-botonAgregar.textContent = 'Agregar';
-botonAgregar.id = 'btn-agregar';
+  form.appendChild(input);
+  form.appendChild(boton);
 
- // Crear contenedor donde estara la lista de tareas
-  const contenedor = document.createElement('div-tarea1');
-  contenedor.id = "contenedor-tareas";
-  contenedor.style.border = "1px solid #ccc";
-  contenedor.style.padding = "15px";
-  contenedor.style.marginTop = "5px";
-  contenedor.style.borderRadius = "8px";
-  contenedor.style.width = "100px";
-  contenedor.style.backgroundColor = "#f9f9f9";
-  contenedor.style.margin = "50px auto";
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    onSubmit(input.value);
+    input.value = '';
+  });
 
-contenedorFormulario.appendChild(inputTarea);
-contenedorFormulario.appendChild(botonAgregar);
-
-botonAgregar.addEventListener('click', () => {
-  const nombreTarea = inputTarea.value.trim();
-
-  if (nombreTarea !== '') {
-    console.log('Tarea agregada:', nombreTarea);
-    inputTarea.value = ''; 
-  } else {
-    alert('escribe una tarea.');
-  }
-});
+  return form;
+}
